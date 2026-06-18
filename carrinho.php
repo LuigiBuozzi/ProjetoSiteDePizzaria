@@ -7,7 +7,10 @@ require_once 'includes/header.php';
 
 <div id="itens-carrinho"></div>
 
-<h3 style="margin-top: 20px;">Total do Pedido: R$ <span id="total-carrinho">0.00</span></h3>
+<p style="margin-top: 15px; font-size: 1rem; color: #555;">
+    Taxa de Entrega: R$ <span id="valor-frete">0.00</span>
+</p>
+<h3 style="margin-top: 5px;">Total do Pedido: R$ <span id="total-carrinho">0.00</span></h3>
 
 <hr>
 
@@ -43,6 +46,6 @@ require_once 'includes/header.php';
 <?php endif; ?>
 
 <script src="assets/js/carrinho.js"></script>
-<script src="assets/js/viacep.js"></script> ```
+<script src="assets/js/viacep.js"></script>
 
 <?php require_once 'includes/footer.php'; ?>
