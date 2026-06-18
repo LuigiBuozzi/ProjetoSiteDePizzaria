@@ -1,0 +1,204 @@
+/* =========================================
+   VARIÁVEIS DE CORES E FONTES
+   ========================================= */
+:root {
+    --cor-primaria: #D62828;    /* Vermelho vibrante (tema de pizza) */
+    --cor-secundaria: #F77F00;  /* Laranja para destaques */
+    --cor-fundo: #F8F9FA;       /* Cinza bem claro para o fundo */
+    --cor-texto: #333333;       /* Cinza escuro para facilitar a leitura */
+    --cor-branco: #FFFFFF;
+    --borda-suave: 8px;
+    --sombra-card: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* =========================================
+   RESET E BASE
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1; /* Faz o conteúdo empurrar o rodapé para baixo */
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+h2, h3 {
+    margin-bottom: 1rem;
+    color: var(--cor-primaria);
+}
+
+/* =========================================
+   CABEÇALHO E NAVEGAÇÃO (FLEXBOX)
+   ========================================= */
+header {
+    background-color: var(--cor-branco);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    color: var(--cor-primaria);
+    font-size: 1.8rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--cor-texto);
+    font-weight: 600;
+    margin-left: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--cor-secundaria);
+}
+
+/* =========================================
+   CARDÁPIO E PRODUTOS (CSS GRID)
+   ========================================= */
+.grid-produtos {
+    display: grid;
+    /* Cria colunas responsivas automaticamente! */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.card-produto {
+    background-color: var(--cor-branco);
+    border-radius: var(--borda-suave);
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: var(--sombra-card);
+    transition: transform 0.2s ease;
+}
+
+.card-produto:hover {
+    transform: translateY(-5px); /* Efeito de flutuar ao passar o mouse */
+}
+
+.card-produto img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; /* Impede a imagem de distorcer */
+    border-radius: var(--borda-suave);
+    margin-bottom: 1rem;
+}
+
+.card-produto .preco {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--cor-secundaria);
+    margin: 1rem 0;
+}
+
+/* =========================================
+   BOTÕES GERAIS
+   ========================================= */
+button {
+    background-color: var(--cor-primaria);
+    color: var(--cor-branco);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: var(--borda-suave);
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #A61A1A; /* Tom mais escuro de vermelho */
+}
+
+/* =========================================
+   FORMULÁRIOS (LOGIN, CADASTRO, CHECKOUT)
+   ========================================= */
+.form-auth {
+    background-color: var(--cor-branco);
+    padding: 2rem;
+    border-radius: var(--borda-suave);
+    box-shadow: var(--sombra-card);
+    max-width: 400px;
+    margin: 0 auto; /* Centraliza na tela */
+}
+
+.form-auth div {
+    margin-bottom: 1rem;
+}
+
+.form-auth label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.form-auth input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.form-auth input:focus {
+    outline: none;
+    border-color: var(--cor-secundaria);
+}
+
+/* =========================================
+   TABELA DE PEDIDOS
+   ========================================= */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--cor-branco);
+    box-shadow: var(--sombra-card);
+    border-radius: var(--borda-suave);
+    overflow: hidden; /* Mantém as bordas arredondadas com a tabela dentro */
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+th {
+    background-color: var(--cor-primaria);
+    color: var(--cor-branco);
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* =========================================
+   RODAPÉ
+   ========================================= */
+footer {
+    background-color: var(--cor-texto);
+    color: var(--cor-branco);
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: auto;
+}
