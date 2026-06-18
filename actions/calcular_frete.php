@@ -6,7 +6,7 @@ header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cep'])) {
     // Remove qualquer caractere que não seja número
-    $cep = preg_replace(/\D/, '', $_POST['cep']);
+    $cep = preg_replace('/\D/', '', $_POST['cep']);
 
     if (strlen($cep) === 8) {
         // Simulando uma regra de frete por região usando o primeiro dígito do CEP
