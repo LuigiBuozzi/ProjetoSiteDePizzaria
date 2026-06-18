@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Coloca um aviso de "Buscando..." enquanto a API responde
                 enderecoInput.value = "Buscando endereço...";
 
-                // Faz a requisição para a API do ViaCEP
+                // 1. Faz a requisição para a API externa do ViaCEP
                 fetch(`https://viacep.com.br/ws/${cep}/json/`)
                     .then(resposta => resposta.json()) // Transforma a resposta em JSON
                     .then(dados => {
@@ -29,6 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
                             enderecoInput.value = `${dados.logradouro}, , ${dados.bairro} - ${dados.localidade}/${dados.uf}`;
                             // Foca no campo de endereço para o cliente digitar apenas o número
                             enderecoInput.focus();
+
+                            // 2. Com o endereço preenchido, chama a nossa API interna de frete
+                            calcularFreteInterno(cep);
                         }
                     })
                     .catch(erro => {
@@ -40,3 +43,49 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+/**
+ * Envia o CEP via POST para o PHP calcular a taxa de entrega
+ * @param {string} cep 
+ */
+function calcularFreteInterno(cep) {
+    // Prepara os dados para enviar via POST (FormData)
+    let dadosForm = new FormData();
+    dadosForm.append('cep', cep);
+
+    // Faz a requisição para o nosso motor PHP
+    fetch('actions/calcular_frete.php', {
+        method: 'POST',
+        body: dadosForm
+    })
+    .then(res => res.json())
+    .then(resposta => {
+        if (resposta.sucesso) {
+            const campoFrete = document.getElementById('valor-frete');
+            const totalDisplay = document.getElementById('total-carrinho');
+
+            // 1. Atualiza o valor do frete na tela
+            if (campoFrete) {
+                campoFrete.innerText = resposta.valor_frete.toFixed(2);
+            }
+
+            // 2. Recalcula o total geral (Produtos + Frete)
+            if (totalDisplay) {
+                // Pega os itens do carrinho para saber o valor real dos produtos
+                let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+                let subtotalProdutos = carrinho.reduce((total, item) => total + (item.preco * item.quantidade), 0);
+                
+                // Soma o subtotal das pizzas com a taxa de entrega que o PHP devolveu
+                let totalGeral = subtotalProdutos + resposta.valor_frete;
+                
+                // Atualiza o h3 do total na tela do carrinho
+                totalDisplay.innerText = totalGeral.toFixed(2);
+            }
+        } else {
+            alert(resposta.erro);
+        }
+    })
+    .catch(erro => {
+        console.error('Erro ao calcular o frete:', erro);
+    });
+}
