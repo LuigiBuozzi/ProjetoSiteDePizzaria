@@ -43,5 +43,6 @@ require_once 'includes/header.php';
 <?php endif; ?>
 
 <script src="assets/js/carrinho.js"></script>
+<script src="assets/js/viacep.js"></script> ```
 
 <?php require_once 'includes/footer.php'; ?>
