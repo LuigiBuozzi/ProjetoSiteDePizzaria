@@ -2,9 +2,9 @@
 // config/database.php
 
 $host = 'localhost';
-$dbname = 'pizzaria_tads'; // Mude se o nome do seu banco for diferente
+$dbname = 'pizzaria'; // Mude se o nome do seu banco for diferente
 $user = 'postgres';        // Seu usuário do Postgres
-$password = 'suasenha';    // Sua senha do Postgres
+$password = '1234';    // Sua senha do Postgres
 
 try {
     // String de conexão DSN para PostgreSQL
